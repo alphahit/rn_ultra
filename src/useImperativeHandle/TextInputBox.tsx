@@ -1,5 +1,5 @@
 /* eslint-disable no-labels */
-import {View, Text, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import React, {forwardRef, useImperativeHandle, useRef, useState} from 'react';
 
 const TextInputBox = forwardRef((props, ref) => {
