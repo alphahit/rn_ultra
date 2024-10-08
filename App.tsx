@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -18,6 +19,8 @@ import ParentComponent from './src/useImperativeHandle/ParentComponent';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Search from './src/searchWdebounce/Search';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import SearchDebounce from './src/searchWdebounce/SearchDebounce';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -26,6 +29,16 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const Drawer = createDrawerNavigator();
+  const Tab = createBottomTabNavigator();
+
+  function MyTabs() {
+    return (
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Search" component={Search} />
+        <Tab.Screen name="SearchDebounce" component={SearchDebounce} />
+      </Tab.Navigator>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -38,7 +51,7 @@ function App(): React.JSX.Element {
             name="useImperativeHandle"
             component={ParentComponent}
           />
-          <Drawer.Screen name="SearchDebounce" component={Search} />
+          <Drawer.Screen name="DebounceWThrottle" component={MyTabs} />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
