@@ -1,3 +1,7 @@
+// Debouncing is another JavaScript technique that ensures a function is only executed after a certain delay following the last invocation. 
+// In React Native, it’s crucial for smoother user interactions.
+// Debouncing is vital in scenarios like handling user input in search bars, reducing the number of API requests sent when users type rapidly.
+
 import {View, Text, TextInput, FlatList, StyleSheet} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 

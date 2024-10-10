@@ -18,9 +18,10 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import ParentComponent from './src/useImperativeHandle/ParentComponent';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Search from './src/searchWdebounce/Search';
+import Search from './src/throttleWdebounce/Search';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import SearchDebounce from './src/searchWdebounce/SearchDebounce';
+import SearchDebounce from './src/throttleWdebounce/SearchDebounce';
+import Throttle from './src/throttleWdebounce/Throttle';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,6 +37,7 @@ function App(): React.JSX.Element {
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="SearchDebounce" component={SearchDebounce} />
+        <Tab.Screen name="Throttle" component={Throttle} />
       </Tab.Navigator>
     );
   }
