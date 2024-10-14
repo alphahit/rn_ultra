@@ -22,6 +22,7 @@ import Search from './src/throttleWdebounce/Search';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SearchDebounce from './src/throttleWdebounce/SearchDebounce';
 import Throttle from './src/throttleWdebounce/Throttle';
+import LazyLoading from './src/lazyLoading/LazyLoading';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -54,6 +55,7 @@ function App(): React.JSX.Element {
             component={ParentComponent}
           />
           <Drawer.Screen name="DebounceWThrottle" component={MyTabs} />
+          <Drawer.Screen name="LazyLoading" component={LazyLoading} />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
