@@ -23,6 +23,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SearchDebounce from './src/throttleWdebounce/SearchDebounce';
 import Throttle from './src/throttleWdebounce/Throttle';
 import LazyLoading from './src/lazyLoading/LazyLoading';
+import SharedValue from './src/animation/SharedValue';
+import CustomDrawerContent from './src/CustomDrawerContent';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -32,10 +34,18 @@ function App(): React.JSX.Element {
   };
   const Drawer = createDrawerNavigator();
   const Tab = createBottomTabNavigator();
+  const DrawerAnimated = createDrawerNavigator();
 
+  function AnimateDrawer() {
+    return (
+      <DrawerAnimated.Navigator initialRouteName="SharedValue">
+        <Drawer.Screen name="SharedValue" component={SharedValue} />
+      </DrawerAnimated.Navigator>
+    );
+  }
   function MyTabs() {
     return (
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="SearchDebounce" component={SearchDebounce} />
         <Tab.Screen name="Throttle" component={Throttle} />
@@ -49,13 +59,23 @@ function App(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="useImperativeHandle">
+        <Drawer.Navigator
+          screenOptions={{
+            drawerActiveTintColor: 'pink',
+          }}
+          drawerContent={props => <CustomDrawerContent {...props} />}
+          initialRouteName="useImperativeHandle">
           <Drawer.Screen
             name="useImperativeHandle"
             component={ParentComponent}
           />
           <Drawer.Screen name="DebounceWThrottle" component={MyTabs} />
           <Drawer.Screen name="LazyLoading" component={LazyLoading} />
+          <Drawer.Screen
+            options={{headerShown: false}}
+            name="AnimateDrawer"
+            component={AnimateDrawer}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
