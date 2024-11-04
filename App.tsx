@@ -36,7 +36,7 @@ function App(): React.JSX.Element {
   const Tab = createBottomTabNavigator();
   const DrawerAnimated = createDrawerNavigator();
 
-  function AnimateDrawer() {
+  function Animation() {
     return (
       <DrawerAnimated.Navigator initialRouteName="SharedValue">
         <Drawer.Screen name="SharedValue" component={SharedValue} />
@@ -73,8 +73,8 @@ function App(): React.JSX.Element {
           <Drawer.Screen name="LazyLoading" component={LazyLoading} />
           <Drawer.Screen
             options={{headerShown: false}}
-            name="AnimateDrawer"
-            component={AnimateDrawer}
+            name="Animation"
+            component={Animation}
           />
         </Drawer.Navigator>
       </NavigationContainer>

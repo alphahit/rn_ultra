@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const CustomDrawerContent = props => {
   const {state, navigation, descriptors} = props;
-  console.log('props===>', JSON.stringify(props));
 
   return (
     <View style={styles.drawerContent}>
