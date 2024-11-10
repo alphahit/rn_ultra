@@ -25,6 +25,8 @@ import Throttle from './src/throttleWdebounce/Throttle';
 import LazyLoading from './src/lazyLoading/LazyLoading';
 import SharedValue from './src/animation/SharedValue';
 import CustomDrawerContent from './src/CustomDrawerContent';
+import CustomCalendar from './src/customCalendar/CustomCalendar';
+import FadeInFadeOut from './src/animation/FadeInFadeOut';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -40,6 +42,7 @@ function App(): React.JSX.Element {
     return (
       <DrawerAnimated.Navigator initialRouteName="SharedValue">
         <Drawer.Screen name="SharedValue" component={SharedValue} />
+        <Drawer.Screen name="FadeInFadeOut" component={FadeInFadeOut} />
       </DrawerAnimated.Navigator>
     );
   }
@@ -76,6 +79,7 @@ function App(): React.JSX.Element {
             name="Animation"
             component={Animation}
           />
+           <Drawer.Screen name="CustomCalendar" component={CustomCalendar} />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
