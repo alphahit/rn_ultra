@@ -27,6 +27,7 @@ import SharedValue from './src/animation/SharedValue';
 import CustomDrawerContent from './src/CustomDrawerContent';
 import CustomCalendar from './src/customCalendar/CustomCalendar';
 import FadeInFadeOut from './src/animation/FadeInFadeOut';
+import SegmentedControlScreen from './src/animation/SegmentedControlScreen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -43,6 +44,10 @@ function App(): React.JSX.Element {
       <DrawerAnimated.Navigator initialRouteName="SharedValue">
         <Drawer.Screen name="SharedValue" component={SharedValue} />
         <Drawer.Screen name="FadeInFadeOut" component={FadeInFadeOut} />
+        <Drawer.Screen
+          name="SegmentedControlScreen"
+          component={SegmentedControlScreen}
+        />
       </DrawerAnimated.Navigator>
     );
   }
@@ -79,7 +84,7 @@ function App(): React.JSX.Element {
             name="Animation"
             component={Animation}
           />
-           <Drawer.Screen name="CustomCalendar" component={CustomCalendar} />
+          <Drawer.Screen name="CustomCalendar" component={CustomCalendar} />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
