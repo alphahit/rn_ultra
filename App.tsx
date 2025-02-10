@@ -19,7 +19,6 @@ import ParentComponent from './src/useImperativeHandle/ParentComponent';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Search from './src/throttleWdebounce/Search';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SearchDebounce from './src/throttleWdebounce/SearchDebounce';
 import Throttle from './src/throttleWdebounce/Throttle';
 import LazyLoading from './src/lazyLoading/LazyLoading';
@@ -28,6 +27,9 @@ import CustomDrawerContent from './src/CustomDrawerContent';
 import CustomCalendar from './src/customCalendar/CustomCalendar';
 import FadeInFadeOut from './src/animation/FadeInFadeOut';
 import SegmentedControlScreen from './src/animation/SegmentedControlScreen';
+import Timer from './src/timer/Timer';
+import CartLogic from './src/assignment/CartLogic';
+import CircleSelect from './src/assignment/CircleSelect';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,9 +38,9 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const Drawer = createDrawerNavigator();
-  const Tab = createBottomTabNavigator();
+  const Debounce = createDrawerNavigator();
   const DrawerAnimated = createDrawerNavigator();
-
+  // const Assignments = createNativeStackNavigator();
   function Animation() {
     return (
       <DrawerAnimated.Navigator initialRouteName="SharedValue">
@@ -51,13 +53,24 @@ function App(): React.JSX.Element {
       </DrawerAnimated.Navigator>
     );
   }
-  function MyTabs() {
+
+  function Assignment() {
     return (
-      <Tab.Navigator screenOptions={{headerShown: false}}>
-        <Tab.Screen name="Search" component={Search} />
-        <Tab.Screen name="SearchDebounce" component={SearchDebounce} />
-        <Tab.Screen name="Throttle" component={Throttle} />
-      </Tab.Navigator>
+      <DrawerAnimated.Navigator initialRouteName="CartLogic">
+        <Drawer.Screen name="CartLogic" component={CartLogic} />
+        <Drawer.Screen name="CustomCalendar" component={CustomCalendar} />
+        <Drawer.Screen name="CircleSelect" component={CircleSelect} />
+      </DrawerAnimated.Navigator>
+    );
+  }
+
+  function MyDebounce() {
+    return (
+      <Debounce.Navigator initialRouteName="Search">
+        <Debounce.Screen name="Search" component={Search} />
+        <Debounce.Screen name="SearchDebounce" component={SearchDebounce} />
+        <Debounce.Screen name="Throttle" component={Throttle} />
+      </Debounce.Navigator>
     );
   }
   return (
@@ -77,14 +90,20 @@ function App(): React.JSX.Element {
             name="useImperativeHandle"
             component={ParentComponent}
           />
-          <Drawer.Screen name="DebounceWThrottle" component={MyTabs} />
+          <Drawer.Screen   options={{headerShown: false}} name="DebounceWThrottle" component={MyDebounce} />
           <Drawer.Screen name="LazyLoading" component={LazyLoading} />
+          <Drawer.Screen name="Timer" component={Timer} />
           <Drawer.Screen
             options={{headerShown: false}}
             name="Animation"
             component={Animation}
           />
-          <Drawer.Screen name="CustomCalendar" component={CustomCalendar} />
+
+          <Drawer.Screen
+            options={{headerShown: false}}
+            name="Assignment"
+            component={Assignment}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </SafeAreaView>
