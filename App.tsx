@@ -33,6 +33,8 @@ import CircleSelect from './src/assignment/CircleSelect';
 import SelectCircle from './src/assignment/circleSelect/circleSelect';
 import Stocks from './src/stocks/Stocks';
 import ToDo from './src/todo/ToDo';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import CustomnativeModule from './src/nativeModules/CustomnativeModule';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -78,45 +80,50 @@ function App(): React.JSX.Element {
     );
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         // backgroundColor={backgroundStyle.backgroundColor}
       />
-      <NavigationContainer>
-        <Drawer.Navigator
-          screenOptions={{
-            drawerActiveTintColor: 'pink',
-          }}
-          drawerContent={props => <CustomDrawerContent {...props} />}
-          initialRouteName="useImperativeHandle"
-        >
-          <Drawer.Screen
-            name="useImperativeHandle"
-            component={ParentComponent}
-          />
-          <Drawer.Screen
-            options={{ headerShown: false }}
-            name="DebounceWThrottle"
-            component={MyDebounce}
-          />
-          <Drawer.Screen name="LazyLoading" component={LazyLoading} />
-          <Drawer.Screen name="Timer" component={Timer} />
-          <Drawer.Screen name="ToDo" component={ToDo} />
-          <Drawer.Screen
-            options={{ headerShown: false }}
-            name="Animation"
-            component={Animation}
-          />
-          <Drawer.Screen name="Stocks" component={Stocks} />
-          <Drawer.Screen
-            options={{ headerShown: false }}
-            name="Assignment"
-            component={Assignment}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
+          <NavigationContainer>
+            <Drawer.Navigator
+              screenOptions={{
+                drawerActiveTintColor: 'pink',
+              }}
+              drawerContent={props => <CustomDrawerContent {...props} />}
+              initialRouteName="useImperativeHandle"
+            >
+              <Drawer.Screen
+                name="useImperativeHandle"
+                component={ParentComponent}
+              />
+              <Drawer.Screen
+                options={{ headerShown: false }}
+                name="DebounceWThrottle"
+                component={MyDebounce}
+              />
+              <Drawer.Screen name="LazyLoading" component={LazyLoading} />
+              <Drawer.Screen name="Timer" component={Timer} />
+              <Drawer.Screen name="ToDo" component={ToDo} />
+              <Drawer.Screen
+                options={{ headerShown: false }}
+                name="Animation"
+                component={Animation}
+              />
+              <Drawer.Screen name="Stocks" component={Stocks} />
+              <Drawer.Screen name="CustomnativeModule" component={CustomnativeModule} />
+              <Drawer.Screen
+                options={{ headerShown: false }}
+                name="Assignment"
+                component={Assignment}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaView>
+    </>
   );
 }
 
