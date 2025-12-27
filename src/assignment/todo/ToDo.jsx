@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  Alert,
 } from 'react-native';
 
 const ToDo = () => {
@@ -15,33 +16,31 @@ const ToDo = () => {
   const [toDoTitle, setToDoTitle] = useState('');
 
   const [completedList, setcompletedList] = useState([]);
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={{color: 'black'}}>{item.title}</Text>
+      <Text style={{ color: 'black' }}>{item.title}</Text>
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
           console.log('Test Todo');
-          setcompletedList([...completedList, item])
+          setcompletedList([...completedList, item]);
           let updatedTodo = toDoList.filter(
             toDoItem => toDoItem.title !== item.title,
           );
 
           setToDoList(updatedTodo);
-        }}>
-        <Text style={{color: 'white'}}>Done</Text>
+        }}
+      >
+        <Text style={{ color: 'white' }}>Done</Text>
       </TouchableOpacity>
     </View>
   );
 
-
-
-
-  const renderCompletedItem = ({item}) => (
+  const renderCompletedItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={{color: 'black'}}>{item.title}</Text>
+      <Text style={{ color: 'black' }}>{item.title}</Text>
       <TouchableOpacity
-        style={[styles.buttonStyle, {backgroundColor: 'green'}]}
+        style={[styles.buttonStyle, { backgroundColor: 'green' }]}
         disabled={true}
         onPress={() => {
           console.log('Test Todo');
@@ -51,28 +50,34 @@ const ToDo = () => {
           );
 
           setToDoList(updatedTodo);
-        }}>
-        <Text style={{color: 'white'}}>Completed</Text>
+        }}
+      >
+        <Text style={{ color: 'white' }}>Completed</Text>
       </TouchableOpacity>
     </View>
   );
-
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <TextInput
           value={toDoTitle}
-          style={{color: 'black'}}
+          placeholder='Enter Todo'
+          style={{ color: 'black', height:70, borderWidth:1 }}
           onChangeText={setToDoTitle}
         />
 
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() => {
-            setToDoList([...toDoList, {title: toDoTitle, status: 'ToDo'}]);
-            setToDoTitle('')
-          }}>
+            if (toDoTitle.length > 0) {
+              setToDoList([...toDoList, { title: toDoTitle, status: 'ToDo' }]);
+              setToDoTitle('');
+            } else {
+              Alert.alert('Enter Todo First');
+            }
+          }}
+        >
           <Text>Add Todo</Text>
         </TouchableOpacity>
       </View>
@@ -131,13 +136,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  buttonStyle:{
+  buttonStyle: {
     backgroundColor: 'blue',
     height: 50,
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
 export default ToDo;
